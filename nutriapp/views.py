@@ -45,7 +45,8 @@ def post_facebook_msg(fbid,received_message):
 			post_response_message(fbid,nutri_text)
 			break
 		else:
-			nutriData(token)
+			received_message=received_message.replace(" ","%20")
+			nutriData(received_message)
 			for i in range(0,len(list_data)):
 				nutri_text=list_data[i]
 				print(nutri_text)
