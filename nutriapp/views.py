@@ -9,13 +9,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
-PAGE_ACCESS_TOKEN="EAAEnu2J7KlQBAB23Lgz3VNZCUVPCt3DfRcbreTuIwZARNgwq38ZAejRjIc28ZAZAFe4fUTuogSNBX1tHujCcFLpAqWFoHtgVQJ8kzH2kYTA2pORx4nGZBAMyhPIU6DLGZCfAOkQBPrnan6nl5apsMh0Q9I0a7iq06ADJQkmYMKlvgZDZD"
+PAGE_ACCESS_TOKEN="YOUR_PAGE_TOKEN"
 VERIFY_TOKEN="654321"
 list_data=[]
 
 class nutriView(generic.View):
-	name="taco"
-
 	def get(self,request,*args,**kwargs):
 		if self.request.GET['hub.verify_token']==VERIFY_TOKEN:
 			return HttpResponse(self.request.GET['hub.challenge'])
@@ -65,7 +63,7 @@ def post_response_message(fbid,nutri_text):
 #function to handle nutrition api
 def nutriData(name):
 	front_main_api='https://api.nutritionix.com/v1_1/search/'
-	back_main_api='?results=0%3A7&cal_min=0&cal_max=50000&fields=*&appId=71e7277d&appKey=b9c6e8d9b38f67926271245d3b352c38'
+	back_main_api='?results=0%3A7&cal_min=0&cal_max=50000&fields=*&appId=APP_IDd&appKey=APP_KEY'
 	URL=front_main_api+name+back_main_api
 	#print(URL)
 
@@ -80,14 +78,6 @@ def nutriData(name):
 		list_data.append(itemData)
 
 
-
-
-
-
-'''nutriData("butter")
-print(list_data)
-print(list_data[1])
-print(len(list_data))'''
 
 
 
