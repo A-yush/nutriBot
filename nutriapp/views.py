@@ -39,7 +39,7 @@ class nutriView(generic.View):
 def post_facebook_msg(fbid,received_message):
 	tokens=re.sub(r"[^a-zA-Z0-9\s]",' ',received_message).lower().split()
 	for token in tokens:
-		list1=['hy','hello','sup','hola']
+		list1=['hy','hello','sup','hola','hey','heya']
 		if token in list1:
 			nutri_text="hi I am nutri bot. Type the name of the product you want to see."
 			post_response_message(fbid,nutri_text)
