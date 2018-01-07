@@ -70,7 +70,7 @@ def nutriData(name):
 		calories=each['fields']['nf_calories']
 		fat=each['fields']['nf_total_fat']
 		cholestrol=each['fields']['nf_cholesterol']
-		itemData="Brand Name: "+brand_name+"\n Item Name: "+item_name+"\n Calories: "+calories+"\n fat: "+fat+"\n Cholestrol: "+cholestrol
+		itemData="Brand Name: "+brand_name+"\n Item Name: "+item_name+"\n Calories: "+str(calories)+"\n fat: "+str(fat)+"\n Cholestrol: "+str(cholestrol)
 		list_data.append(itemData)
 
 
