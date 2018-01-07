@@ -52,7 +52,7 @@ class nutriView(generic.View):
 			return HttpResponse()
 
 def post_facebook_msg(fbid,received_message):
-	tokens=re.sub(r"[^a-zA-Z0-9\s",' ',received_message).lower().split()
+	tokens=re.sub(r"[^a-zA-Z0-9\s]",' ',received_message).lower().split()
 	for token in tokens:
 		list1=['hy','hello','sup','hola']
 		if token in list1:
