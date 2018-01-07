@@ -50,6 +50,7 @@ def post_facebook_msg(fbid,received_message):
 				nutri_text=list_data[i]
 				print(nutri_text)
 				post_response_message(fbid,nutri_text)
+			del list_data[:]
 
 def post_response_message(fbid,nutri_text):
 		post_msg_url='https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
