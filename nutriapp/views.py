@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 PAGE_ACCESS_TOKEN="EAAEnu2J7KlQBAB23Lgz3VNZCUVPCt3DfRcbreTuIwZARNgwq38ZAejRjIc28ZAZAFe4fUTuogSNBX1tHujCcFLpAqWFoHtgVQJ8kzH2kYTA2pORx4nGZBAMyhPIU6DLGZCfAOkQBPrnan6nl5apsMh0Q9I0a7iq06ADJQkmYMKlvgZDZD"
 VERIFY_TOKEN="654321"
+list_data=[]
 
 class nutriView(generic.View):
 	name="taco"
@@ -43,9 +44,11 @@ def post_facebook_msg(fbid,received_message):
 			nutri_text="hi I am nutri bot. Type the name of the product you want to see."
 			break
 		else:
-			nutri_text=nutriData(token)
-			print(nutri_text)
-	post_response_message(fbid,nutri_text)
+			nutriData(token)
+			for i in range(0,len(list_data)):
+				nutri_text=list_data[i]
+				print(nutri_text)
+				post_response_message(fbid,nutri_text)
 
 def post_response_message(fbid,nutri_text):
 		post_msg_url='https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
@@ -63,16 +66,18 @@ def nutriData(name):
 	for each in JSON_OBJ['hits']:
 		brand_name=each['fields']['brand_name']
 		item_name=each['fields']['item_name']
-		itemData=brand_name+"\n"+item_name
-		return itemData
+		itemData=brand_name+" "+item_name+"."
+		list_data.append(itemData)
 
 
 
 
 
 
-#view=nutriView()
-#print(view.nutriData("butter"))
+'''nutriData("butter")
+print(list_data)
+print(list_data[1])
+print(len(list_data))'''
 
 
 
