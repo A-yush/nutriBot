@@ -43,7 +43,7 @@ class nutriView(generic.View):
 
 
 	def post(self,request,*args,**kwargs):
-		incomming_mssgs=json.loads(self.request.body.decode('utf-8'))
+		incoming_mssgs=json.loads(self.request.body.decode('utf-8'))
 		for entry in incoming_mssgs['entry']:
 			for message in entry['messaging']:
 				if 'message' in message:
