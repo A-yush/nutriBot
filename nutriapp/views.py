@@ -64,7 +64,7 @@ def nutriData(name):
 		brand_name=each['fields']['brand_name']
 		item_name=each['fields']['item_name']
 		itemData=brand_name+"\n"+item_name
-		return itemdata
+		return itemData
 
 
 
