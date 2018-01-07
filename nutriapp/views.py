@@ -48,7 +48,7 @@ class nutriView(generic.View):
 			for message in entry['messaging']:
 				if 'message' in message:
 					pprint(message)
-					#post_facebook_msg(message['sender']['id'],message['message']['text'])
+					post_facebook_msg(message['sender']['id'],message['message']['text'])
 			return HttpResponse()
 
 	def post_facebook_msg(fbid,received_message):
