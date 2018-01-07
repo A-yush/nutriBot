@@ -26,22 +26,6 @@ class nutriView(generic.View):
 		return generic.View.dispatch(self,request,*args,**kwargs)
 
 
-	#function to handle nutrition api
-	
-	def nutriData(name):
-		front_main_api='https://api.nutritionix.com/v1_1/search/'
-		back_main_api='?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=71e7277d&appKey=b9c6e8d9b38f67926271245d3b352c38'
-		URL=front_main_api+name+back_main_api
-		#print(URL)
-
-		JSON_OBJ=requests.get(URL).json()
-		for each in JSON_OBJ['hits']:
-			brand_name=each['fields']['brand_name']
-			item_name=each['fields']['item_name']
-			itemData=brandname+"\n"+item_name
-			return itemdata
-
-
 	def post(self,request,*args,**kwargs):
 		incoming_mssgs=json.loads(self.request.body.decode('utf-8'))
 		for entry in incoming_mssgs['entry']:
@@ -59,7 +43,7 @@ def post_facebook_msg(fbid,received_message):
 			nutri_text="hi I am nutri bot. Type the name of the product you want to see."
 			break
 		else:
-			nutri_text=nutriname(token)
+			nutri_text=nutriData(token)
 			print(nutri_text)
 	post_response_message(fbid,nutri_text)
 
@@ -67,6 +51,21 @@ def post_response_message(fbid,nutri_text):
 		post_msg_url='https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 		response_msg=json.dumps({"recipient":{"id":fbid},"message":{"text":nutri_text}})
 		status=requests.post(post_msg_url,headers={"content-Type":"application/json"},data=response_msg)
+
+#function to handle nutrition api
+def nutriData(name):
+	front_main_api='https://api.nutritionix.com/v1_1/search/'
+	back_main_api='?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=71e7277d&appKey=b9c6e8d9b38f67926271245d3b352c38'
+	URL=front_main_api+name+back_main_api
+	#print(URL)
+
+	JSON_OBJ=requests.get(URL).json()
+	for each in JSON_OBJ['hits']:
+		brand_name=each['fields']['brand_name']
+		item_name=each['fields']['item_name']
+		itemData=brandname+"\n"+item_name
+		return itemdata
+
 
 
 
