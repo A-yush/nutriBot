@@ -38,6 +38,7 @@ class nutriView(generic.View):
 
 def post_facebook_msg(fbid,received_message):
 	tokens=re.sub(r"[^a-zA-Z0-9\s]",' ',received_message).lower().split()
+	count=0
 	for token in tokens:
 		list1=['hy','hello','sup','hola','hey','heya']
 		if token in list1:
@@ -51,6 +52,9 @@ def post_facebook_msg(fbid,received_message):
 				nutri_text=list_data[i]
 				print(nutri_text)
 				post_response_message(fbid,nutri_text)
+				count+=1
+				if count >4:
+					break
 			del list_data[:]
 
 def post_response_message(fbid,nutri_text):
