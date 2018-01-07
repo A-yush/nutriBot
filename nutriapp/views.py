@@ -51,19 +51,19 @@ class nutriView(generic.View):
 					post_facebook_msg(message['sender']['id'],message['message']['text'])
 			return HttpResponse()
 
-	def post_facebook_msg(fbid,received_message):
-		tokens=re.sub(r"[^a-zA-Z0-9\s",' ',received_message).lower().split()
-		for token in tokens:
-			list1=['hy','hello','sup','hola']
-			if token in list1:
-				nutri_text="hi I am nutri bot. Type the name of the product you want to see."
-				break
-			else:
-				nutri_text=nutriname(token)
-				print(nutri_text)	
-		post_response_message(fbid,nutri_text)
+def post_facebook_msg(fbid,received_message):
+	tokens=re.sub(r"[^a-zA-Z0-9\s",' ',received_message).lower().split()
+	for token in tokens:
+		list1=['hy','hello','sup','hola']
+		if token in list1:
+			nutri_text="hi I am nutri bot. Type the name of the product you want to see."
+			break
+		else:
+			nutri_text=nutriname(token)
+			print(nutri_text)
+	post_response_message(fbid,nutri_text)
 
-	def post_response_message(fbid,nutri_text):
+def post_response_message(fbid,nutri_text):
 		post_msg_url='https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 		response_msg=json.dump({"recipient":{"id":fbid},"message":{"text":nutri_text}})
 		status=requests.post(post_msg_url,headers={"content-Type":"application/json"},data=response_msg)
