@@ -25,7 +25,7 @@ SECRET_KEY = 'w8h+tv2t!95s26*%**a06pzp@6sc4o_an1oyl+6jdogtwoby)%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nutrifyme.herokuapp.com']
 
 
 # Application definition
