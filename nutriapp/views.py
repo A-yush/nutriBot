@@ -42,6 +42,7 @@ def post_facebook_msg(fbid,received_message):
 		list1=['hy','hello','sup','hola']
 		if token in list1:
 			nutri_text="hi I am nutri bot. Type the name of the product you want to see."
+			post_response_message(fbid,nutri_text)
 			break
 		else:
 			nutriData(token)
@@ -66,7 +67,7 @@ def nutriData(name):
 	for each in JSON_OBJ['hits']:
 		brand_name=each['fields']['brand_name']
 		item_name=each['fields']['item_name']
-		itemData=brand_name+" "+item_name+"."
+		itemData=brand_name+"\n"+item_name+"."
 		list_data.append(itemData)
 
 
