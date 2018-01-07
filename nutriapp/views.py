@@ -65,7 +65,7 @@ def post_facebook_msg(fbid,received_message):
 
 def post_response_message(fbid,nutri_text):
 		post_msg_url='https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
-		response_msg=json.dump({"recipient":{"id":fbid},"message":{"text":nutri_text}})
+		response_msg=json.dumps({"recipient":{"id":fbid},"message":{"text":nutri_text}})
 		status=requests.post(post_msg_url,headers={"content-Type":"application/json"},data=response_msg)
 
 
