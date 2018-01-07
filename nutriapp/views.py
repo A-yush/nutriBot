@@ -59,7 +59,7 @@ def post_response_message(fbid,nutri_text):
 #function to handle nutrition api
 def nutriData(name):
 	front_main_api='https://api.nutritionix.com/v1_1/search/'
-	back_main_api='?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=71e7277d&appKey=b9c6e8d9b38f67926271245d3b352c38'
+	back_main_api='?results=0%3A20&cal_min=0&cal_max=50000&fields=*&appId=71e7277d&appKey=b9c6e8d9b38f67926271245d3b352c38'
 	URL=front_main_api+name+back_main_api
 	#print(URL)
 
@@ -67,7 +67,10 @@ def nutriData(name):
 	for each in JSON_OBJ['hits']:
 		brand_name=each['fields']['brand_name']
 		item_name=each['fields']['item_name']
-		itemData=brand_name+"\n"+item_name+"."
+		calories=each['fields']['nf_calories']
+		fat=each['fields']['nf_total_fat']
+		cholestrol=each['fields']['nf_cholesterol']
+		itemData="Brand Name: "+brand_name+"\n Item Name: "+item_name+"\n Calories: "+calories+"\n fat: "+fat+"\n Cholestrol: "+cholestrol
 		list_data.append(itemData)
 
 
