@@ -63,7 +63,7 @@ def nutriData(name):
 	for each in JSON_OBJ['hits']:
 		brand_name=each['fields']['brand_name']
 		item_name=each['fields']['item_name']
-		itemData=brandname+"\n"+item_name
+		itemData=brand_name+"\n"+item_name
 		return itemdata
 
 
