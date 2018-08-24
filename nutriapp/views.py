@@ -26,9 +26,14 @@ class nutriView(generic.View):
 
 
 	def post(self,request,*args,**kwargs):
+		# Converts the text payload into a python dictionary
 		incoming_mssgs=json.loads(self.request.body.decode('utf-8'))
+		# Facebook recommends going through every entry since they might send
+        	# multiple messages in a single call during high load
 		for entry in incoming_mssgs['entry']:
 			for message in entry['messaging']:
+			# Check to make sure the received call is a message call
+                	# This might be delivery, optin, postback for other events
 				if 'message' in message:
 					pprint(message)
 					post_facebook_msg(message['sender']['id'],message['message']['text'])
