@@ -39,6 +39,7 @@ class nutriView(generic.View):
 					post_facebook_msg(message['sender']['id'],message['message']['text'])
 			return HttpResponse()
 
+# function to handle post messages from user
 def post_facebook_msg(fbid,received_message):
 	tokens=re.sub(r"[^a-zA-Z0-9\s]",' ',received_message).lower().split()
 	count=0
@@ -48,18 +49,23 @@ def post_facebook_msg(fbid,received_message):
 			nutri_text="hi I am nutri bot. Type the name of the product you want to see."
 			post_response_message(fbid,nutri_text)
 			break
-		else:
+		else:	
+			# replacing space to correct the input to match the url
 			received_message=received_message.replace(" ","%20")
 			nutriData(received_message)
 			for i in range(0,len(list_data)):
 				count+=1
+				# limiting response to 4 count
 				if count >4:
 					break
 				nutri_text=list_data[i]
 				print(nutri_text)
 				post_response_message(fbid,nutri_text)
+				
+			# emptying the food list
 			del list_data[:]
 
+# function to give post messages to fb 
 def post_response_message(fbid,nutri_text):
 		post_msg_url='https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 		response_msg=json.dumps({"recipient":{"id":fbid},"message":{"text":nutri_text}})
